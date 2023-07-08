@@ -55,7 +55,7 @@ class _TtossAppBarState extends State<TtossAppBar> {
                     ),
                   ))
               ],
-            ),
+            ).animate().shake(duration: 2000.ms, hz: 3).then().fadeOut(duration: 1000.ms),
           ),
           width10,
         ],

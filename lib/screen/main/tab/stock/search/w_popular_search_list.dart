@@ -27,12 +27,11 @@ class _PopularSearchListState extends State<PopularSearchList> {
         height20,
         ...popularStocks
             .mapIndexed((e, index) => OpenContainer<bool>(
-                  closedColor: Colors.black,
-                  openColor: Colors.black,
-                  middleColor: Colors.black,
+                  closedColor: Colors.transparent,
+                  openColor: Colors.transparent,
                   transitionType: ContainerTransitionType.fade,
-                  openBuilder: (context, onClose) => StockDetail(stockName: e.name),
-                  closedBuilder: (context, _) {
+                  openBuilder: (context, closeFunction) => StockDetail(stockName: e.name),
+                  closedBuilder: (context, openFunction) {
                     return Row(
                       children: [
                         (index + 1).text.bold.white.size(16).make(),

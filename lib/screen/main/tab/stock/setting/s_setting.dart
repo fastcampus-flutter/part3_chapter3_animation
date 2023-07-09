@@ -1,6 +1,5 @@
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/dart/extension/datetime_extension.dart';
-import 'package:fast_app_base/screen/main/tab/stock/setting/w_animated_app_bar.dart';
 import 'package:fast_app_base/screen/main/tab/stock/setting/w_switch_menu.dart';
 import 'package:fast_app_base/screen/opensource/s_opensource.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +8,7 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import '../../../../../common/data/preference/prefs.dart';
 import '../../../../../common/widget/w_big_button.dart';
 import 'd_number.dart';
+import 'w_animated_app_bar.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -18,7 +18,7 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
-  final _scrollController = ScrollController();
+  final scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +26,9 @@ class _SettingScreenState extends State<SettingScreen> {
       body: Stack(
         children: [
           ListView(
-            controller: _scrollController,
+            controller: scrollController,
+            padding: const EdgeInsets.only(top: 150),
             children: [
-              Height(150),
               Obx(
                 () => SwitchMenu('푸시 설정', Prefs.isPushOnRx.get(), onChanged: (isOn) {
                   Prefs.isPushOnRx.set(isOn);
@@ -71,14 +71,63 @@ class _SettingScreenState extends State<SettingScreen> {
                   Nav.push(const OpensourceScreen());
                 },
               ),
-              Container(
-                height: 1000,
-                color: Colors.black,
-                width: context.deviceWidth,
-              )
+              BigButton(
+                '오픈소스 화면',
+                onTap: () async {
+                  Nav.push(const OpensourceScreen());
+                },
+              ),
+              BigButton(
+                '오픈소스 화면',
+                onTap: () async {
+                  Nav.push(const OpensourceScreen());
+                },
+              ),
+              BigButton(
+                '오픈소스 화면',
+                onTap: () async {
+                  Nav.push(const OpensourceScreen());
+                },
+              ),
+              BigButton(
+                '오픈소스 화면',
+                onTap: () async {
+                  Nav.push(const OpensourceScreen());
+                },
+              ),
+              BigButton(
+                '오픈소스 화면',
+                onTap: () async {
+                  Nav.push(const OpensourceScreen());
+                },
+              ),
+              BigButton(
+                '오픈소스 화면',
+                onTap: () async {
+                  Nav.push(const OpensourceScreen());
+                },
+              ),
+              BigButton(
+                '오픈소스 화면',
+                onTap: () async {
+                  Nav.push(const OpensourceScreen());
+                },
+              ),
+              BigButton(
+                '오픈소스 화면',
+                onTap: () async {
+                  Nav.push(const OpensourceScreen());
+                },
+              ),
+              BigButton(
+                '오픈소스 화면',
+                onTap: () async {
+                  Nav.push(const OpensourceScreen());
+                },
+              ),
             ],
           ),
-          AnimatedAppBar('설정', controller: _scrollController),
+          AnimatedAppBar('설정', controller: scrollController)
         ],
       ),
     );

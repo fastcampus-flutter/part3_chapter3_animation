@@ -1,6 +1,8 @@
+import 'package:animations/animations.dart';
 import 'package:fast_app_base/common/common.dart';
 import 'package:fast_app_base/common/dart/extension/datetime_extension.dart';
 import 'package:fast_app_base/screen/main/tab/stock/search/dummy_popular_stocks.dart';
+import 'package:fast_app_base/screen/main/tab/stock/search/s_stock_detail.dart';
 import 'package:flutter/material.dart';
 
 class PopularSearchList extends StatefulWidget {
@@ -24,18 +26,27 @@ class _PopularSearchListState extends State<PopularSearchList> {
         ).pSymmetric(h: 20, v: 15),
         height20,
         ...popularStocks
-            .mapIndexed((e, index) => Row(
-                  children: [
-                    (index + 1).text.bold.white.size(16).make(),
-                    width20,
-                    e.name.text.bold.white.size(16).make(),
-                    emptyExpanded,
-                    e.todayPercentageString.text
-                        .color(e.getTodayPercentageColor(context))
-                        .size(16)
-                        .make(),
-                  ],
-                ).pSymmetric(h: 20, v: 20))
+            .mapIndexed((e, index) => OpenContainer<bool>(
+                  closedColor: Colors.black,
+                  openColor: Colors.black,
+                  middleColor: Colors.black,
+                  transitionType: ContainerTransitionType.fade,
+                  openBuilder: (context, onClose) => StockDetail(stockName: e.name),
+                  closedBuilder: (context, _) {
+                    return Row(
+                      children: [
+                        (index + 1).text.bold.white.size(16).make(),
+                        width20,
+                        e.name.text.bold.white.size(16).make(),
+                        emptyExpanded,
+                        e.todayPercentageString.text
+                            .color(e.getTodayPercentageColor(context))
+                            .size(16)
+                            .make(),
+                      ],
+                    ).pSymmetric(h: 20, v: 20);
+                  },
+                ))
             .toList()
       ],
     );

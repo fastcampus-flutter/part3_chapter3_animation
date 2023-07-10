@@ -5,12 +5,14 @@ import '../../../../../common/widget/w_arrow.dart';
 
 class AnimatedAppBar extends StatefulWidget {
   final String title;
-  final ScrollController controller;
+  final ScrollController scrollController;
+  final AnimationController animationController;
 
   const AnimatedAppBar(
     this.title, {
     super.key,
-    required this.controller,
+    required this.scrollController,
+    required this.animationController,
   });
 
   @override
@@ -20,12 +22,18 @@ class AnimatedAppBar extends StatefulWidget {
 class _AnimatedAppBarState extends State<AnimatedAppBar> {
   Duration get duration => 10.ms;
   double scrollPosition = 0;
+  late CurvedAnimation animation =
+      CurvedAnimation(parent: widget.animationController, curve: Curves.bounceInOut);
 
   @override
   void initState() {
-    widget.controller.addListener(() {
+    widget.animationController.addListener(() {
+      setState(() {});
+    });
+
+    widget.scrollController.addListener(() {
       setState(() {
-        scrollPosition = widget.controller.position.pixels;
+        scrollPosition = widget.scrollController.position.pixels;
       });
     });
     super.initState();
@@ -65,9 +73,8 @@ class _AnimatedAppBarState extends State<AnimatedAppBar> {
                 child: const Arrow(
                   direction: AxisDirection.left,
                 )).p20(),
-            Positioned.fill(
-                child: Align(
-              alignment: Alignment.topRight,
+            Positioned(
+              left: animation.value * 200,
               child: TweenAnimationBuilder<Color?>(
                 duration: 1000.ms,
                 tween: ColorTween(
@@ -83,7 +90,7 @@ class _AnimatedAppBarState extends State<AnimatedAppBar> {
                   height: 60,
                 ),
               ),
-            ))
+            )
           ],
         ),
       ),

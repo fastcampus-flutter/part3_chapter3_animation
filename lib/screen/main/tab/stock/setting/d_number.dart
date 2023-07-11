@@ -76,7 +76,7 @@ class _NotificationDialogState extends DialogState<NumberDialog> {
               TextField(
                 focusNode: passwordFocus,
                 obscureText: true,
-                controller: numberController,
+                controller: passwordController,
                 keyboardType: TextInputType.number,
               ),
               RoundButton(
